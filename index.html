@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech writing webring</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Tech writing webring</h1>
+        <p>A circular collection of websites related to tech writing. Navigate through the ring using the links below, or add the links to your own site to join.</p>
+
+        <p>
+            <a href="#" role="button" onclick="goToRandom(event)">Random site</a>
+        </p>
+
+        <h2>Member sites</h2>
+        <ul id="sitesList">
+            <!-- Sites will be loaded here by JavaScript -->
+        </ul>
+
+        <h2>Join the webring</h2>
+            <p>To join this webring, add the links to your site and submit a pull request adding your site to <code>sites.json</code>. See the <a href="https://github.com/caseyrfsmith/webring">README</a> for instructions.</p>
+            
+        <footer>
+            <small>Powered by GitHub Pages | <a href="https://github.com/caseyrfsmith/webring">View source</a></small>
+        </footer>
+    </main>
+
+    <script src="sites.json"></script>
+    <script>
+        // Load sites from the WEBRING_SITES global variable
+        function loadSites() {
+            const sitesList = document.getElementById('sitesList');
+            
+            if (!window.WEBRING_SITES || window.WEBRING_SITES.length === 0) {
+                sitesList.innerHTML = '<li>No sites in the webring yet. Be the first to join!</li>';
+                return;
+            }
+
+            sitesList.innerHTML = window.WEBRING_SITES.map(site => `
+                <li>
+                    <a href="${site.url}" target="_blank" rel="noopener">${site.name}</a>: <small>${site.description}</small>
+                </li>
+            `).join('');
+        }
+
+        function goToRandom(event) {
+            event.preventDefault();
+            if (window.WEBRING_SITES && window.WEBRING_SITES.length > 0) {
+                const randomSite = window.WEBRING_SITES[Math.floor(Math.random() * window.WEBRING_SITES.length)];
+                window.open(randomSite.url, '_blank');
+            }
+        }
+
+        // Load sites when page loads
+        document.addEventListener('DOMContentLoaded', loadSites);
+    </script>
+</body>
+</html>

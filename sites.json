@@ -1,0 +1,7 @@
+window.WEBRING_SITES = [
+    {
+        "url": "https://docsgoblin.com",
+        "name": "docs goblin",
+        "description": "CT Smith's blog"
+    }
+];

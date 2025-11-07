@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webring navigation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Redirecting...</h1>
+        <p id="message">Taking you to the next site in the webring.</p>
+    </main>
+
+    <script src="sites.json"></script>
+    <script>
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const action = urlParams.get('action');
+            const site = urlParams.get('site');
+            
+            if (!window.WEBRING_SITES || window.WEBRING_SITES.length === 0) {
+                document.getElementById('message').textContent = 'No sites in the webring yet.';
+                return;
+            }
+            
+            function normalizeUrl(url) {
+                return url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+            }
+            
+            function findSiteIndex(siteUrl) {
+                if (!siteUrl) return -1;
+                const normalized = normalizeUrl(siteUrl);
+                return window.WEBRING_SITES.findIndex(s => 
+                    normalizeUrl(s.url) === normalized
+                );
+            }
+            
+            function getNextSite(currentIndex) {
+                return currentIndex < window.WEBRING_SITES.length - 1 
+                    ? window.WEBRING_SITES[currentIndex + 1]
+                    : window.WEBRING_SITES[0];
+            }
+            
+            function getPrevSite(currentIndex) {
+                return currentIndex > 0 
+                    ? window.WEBRING_SITES[currentIndex - 1]
+                    : window.WEBRING_SITES[window.WEBRING_SITES.length - 1];
+            }
+            
+            function getRandomSite() {
+                return window.WEBRING_SITES[Math.floor(Math.random() * window.WEBRING_SITES.length)];
+            }
+            
+            const currentIndex = findSiteIndex(site);
+            
+            if (currentIndex === -1 && action !== 'random') {
+                document.getElementById('message').textContent = 'Site not found in webring.';
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return;
+            }
+            
+            let targetSite;
+            
+            switch(action) {
+                case 'next':
+                    targetSite = getNextSite(currentIndex);
+                    break;
+                case 'prev':
+                    targetSite = getPrevSite(currentIndex);
+                    break;
+                case 'random':
+                    targetSite = getRandomSite();
+                    break;
+                default:
+                    window.location.href = 'index.html';
+                    return;
+            }
+            
+            if (targetSite) {
+                window.location.href = targetSite.url;
+            }
+        })();
+    </script>
+</body>
+</html>
