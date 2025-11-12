@@ -48,5 +48,15 @@ window.WEBRING_SITES = [
         "url": "https://coffeecup.tech/",
         "name": "CoffeeCup.tech",
         "description": "Florence Venisse's portfolio site and blog"
+    },
+    {
+        "url": "https://edmar.sh/",
+        "name": "Ed Marsh&mdash;Technical writer, mentor, content strategist, podcaster",
+        "description": "Living portfolio, blog, and podcast"
+    },
+    {
+        "url": "https://thenotboringtechwriter.com/",
+        "name": "The Not-Boring Tech Writer",
+        "description": "Kate Mueller's podcast"
     }
 ];
