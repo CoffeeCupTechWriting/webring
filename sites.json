@@ -79,7 +79,12 @@ window.WEBRING_SITES = [
         "name": "technicalwriting.dev",
         "description": "Field notes from the frontier of technical writing"
     },
-        {
+    {
+        "url": "https://bufferbuffer.com",
+        "name": "BufferBuffer",
+        "description": "Zapata's (mis)adventures of a technical writer"
+    },
+    {
         "url": "https://www.dufcrule.com/",
         "name": "Technically Writing",
         "description": "Ian Cowley's blog"
