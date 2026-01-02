@@ -88,5 +88,10 @@ window.WEBRING_SITES = [
         "url": "https://www.dufcrule.com/",
         "name": "Technically Writing",
         "description": "Ian Cowley's blog"
+    },
+    {
+        "url": "https://sdeaton.com",
+        "name": "Sarah Deaton",
+        "description": "Sarah Deaton's blog"
     }
 ];
