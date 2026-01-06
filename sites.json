@@ -93,5 +93,10 @@ window.WEBRING_SITES = [
         "url": "https://sdeaton.com",
         "name": "Sarah Deaton",
         "description": "Sarah Deaton's blog"
+    },
+    {
+        "url": "https://kody-with-a-k.com",
+        "name": "Kody Jackson",
+        "description": "The only Kody with a K you'll find blogging about docs!"
     }
 ];
